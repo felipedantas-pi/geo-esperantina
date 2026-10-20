@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MapTiler AR Control</title>
+    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.2.0/maptiler-sdk.umd.min.js"></script>
+    <link href="https://cdn.maptiler.com/maptiler-sdk-js/v4.2.0/maptiler-sdk.css" rel="stylesheet" />
+    <script src="https://cdn.maptiler.com/maptiler-ar-control/v3.0.3/maptiler-ar-control.umd.min.js"></script>
+
+    <style>
+      html, body {
+        margin: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      #overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #ffffff;
+        z-index: 3;
+        display: none;
+      }
+
+      #overlay div {
+        color: rgb(71, 76, 87);
+        position: absolute;
+        width: fit-content;
+        height: fit-content;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        margin: auto;
+        padding: 30px;
+        font: 12px/20px Helvetica Neue,Arial,Helvetica,sans-serif;
+      }
+
+      .blink_me {
+        animation: blinker 1s linear infinite;
+      }
+
+      @keyframes blinker {
+        50% {
+          opacity: 0.2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="overlay">
+      <div class="blink_me">computing model</div>
+    </div>
+
+    <div id="map"></div>
+    <script>
+      maptilersdk.config.apiKey = '44Y6FgGOjtvZz7kGjRMh';
+      // maptilersdk.config.apiKey = 'YOUR_MAPTILER_API_KEY_HERE';
+
+      // Creating a map
+      const map = new maptilersdk.Map({
+        container: 'map',
+        style: maptilersdk.MapStyle.OUTDOOR,
+        zoom: 12,
+        center: [-3.89118,-42.23739],
+      });
+
+      // Waiting for the map to be ready
+      map.on("load", (e) => {
+        const arControl = new maptilerarcontrol.MaptilerARControl({
+          activateAR: true //When the platform allows automatically activates the AR mode as soon as the data is ready
+        });
+
+        arControl.on("computeStart", (e) => {
+          overlay.style.display = "inherit";
+        })
+
+        arControl.on("computeEnd", (e) => {
+          overlay.style.display = "none";
+        })
+
+        map.addControl(arControl, "top-left");
+      })
+
+    </script>
+  </body>
+</html>
