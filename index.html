@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MapTiler AR Control</title>
+    <title>Geo-esperantina AR</title>
     <script src="https://cdn.maptiler.com/maptiler-sdk-js/v4.2.0/maptiler-sdk.umd.min.js"></script>
     <link href="https://cdn.maptiler.com/maptiler-sdk-js/v4.2.0/maptiler-sdk.css" rel="stylesheet" />
     <script src="https://cdn.maptiler.com/maptiler-ar-control/v3.0.3/maptiler-ar-control.umd.min.js"></script>
@@ -69,7 +69,9 @@
         container: 'map',
         style: maptilersdk.MapStyle.OUTDOOR,
         zoom: 12,
-        center: [-3.89118,-42.23739],
+        center: [-42.23739,-3.89118], // starting position [lng, lat]
+        bearing: -7.2,
+        pitch: 45
       });
 
       // Waiting for the map to be ready
