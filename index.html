@@ -68,13 +68,13 @@
       const map = new maptilersdk.Map({
         container: 'map',
         style: maptilersdk.MapStyle.OUTDOOR,
-        zoom: 12,
+        zoom: 14,
         center: [-42.23739,-3.89118], // starting position [lng, lat]
         bearing: -7.2,
         pitch: 45,
         terrain: true,
         terrainControl: true,
-        terrainExaggeration: 2.5    // Multiplica a altura do relevo por 2.5x
+        terrainExaggeration: 10.0    // Multiplica a altura do relevo por 10x
       });
 
       // Waiting for the map to be ready
